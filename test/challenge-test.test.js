@@ -52,7 +52,7 @@ const rawData = {
   ]
 }
 
-describe("#companies", () => {
+describe.only("#companies", () => {
 
   it("returns an array of companies and their employees", () => {
     const expectedOutput = [
