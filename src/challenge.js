@@ -1,6 +1,7 @@
 module.exports = {
     companies,
-    employments
+    employments,
+    peopleWithoutEmployments
 };
 
 function companies(data) {
@@ -19,10 +20,10 @@ function companies(data) {
                     if (employment.company_id === comps.id) {
 
                         var person = {
-                            id: peeps.id,
-                            first_name: peeps.first_name,
-                            last_name: peeps.last_name,
-                            title: employment.title
+                            "id": peeps.id,
+                            "first_name": peeps.first_name,
+                            "last_name": peeps.last_name,
+                            "title": employment.title
                         };
 
                         results.employees.push(person);
@@ -67,6 +68,27 @@ function employments(data) {
             }
         });
 
+    });
+
+    console.log(JSON.stringify(results, null, 2));
+    return results;
+}
+
+function peopleWithoutEmployments(data) {
+
+    var results = [];
+
+    var allPeopleWithoutEmployments = data.people.map(function(people) {
+        if (people.employments.length === 0) {
+
+            var noWork = {
+                "id": people.id,
+                "first_name": people.first_name,
+                "last_name": people.last_name
+            };
+
+            results.push(noWork);
+        }
     });
 
     console.log(JSON.stringify(results, null, 2));
